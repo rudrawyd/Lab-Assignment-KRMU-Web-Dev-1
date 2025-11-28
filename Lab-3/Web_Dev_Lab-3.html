@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Portfolio</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* =========================
+       Global Styles
+    ========================== */
+        :root {
+            --primary: #ff6b35;
+            --primary-dark: #e55421;
+            --accent: #0052cc;
+            --bg-light: #f5f5f5;
+            --card-bg: #ffffff;
+            --text-main: #222222;
+            --text-muted: #555555;
+            --border-radius-lg: 14px;
+            --shadow-soft: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: #ffffff;
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        img {
+            max-width: 100%;
+            ;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.2rem;
+        }
+
+        /* =========================
+       Header (simple top bar)
+    ========================== */
+        header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #eeeeee;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+        }
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.2rem;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a {
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.2s ease-in-out;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* =========================
+       Main Section
+    ========================== */
+        .Main {
+            background-color: var(--bg-light);
+            padding: 2.5rem 0 2rem;
+        }
+
+        .Subject-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .Subject-text {
+            flex: 1 1 300px;
+            min-width: 260px;
+        }
+
+        .Subject-text h1 {
+            font-size: 2.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .Subject-text h1 span {
+            display: block;
+            color: var(--primary);
+            font-size: 2.5rem;
+        }
+
+        .Subject-subtitle {
+            margin-top: 0.4rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .Subject-photo {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+
+        .Subject-tie {
+            position: absolute;
+            bottom: 18%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 55px;
+            background: #ff4b3a;
+            clip-path: polygon(50% 0%, 100% 25%, 65% 100%, 35% 100%, 0% 25%);
+        }
+
+        /* =========================
+       Section Base Styles
+    ========================== */
+        section {
+            padding: 2.2rem 0;
+        }
+
+        section h2 {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+        }
+
+        section p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* =========================
+       About Section
+    ========================== */
+        .about-text {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            text-align: justify;
+        }
+
+        /* =========================
+       Skills Section
+    ========================== */
+        .skills-grid {
+            margin-top: 1rem;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-card {
+            background: var(--accent);
+            color: #ffffff;
+            padding: 1rem;
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 500;
+            box-shadow: var(--shadow-soft);
+            cursor: default;
+            transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+        }
+
+        .skill-card span {
+            display: block;
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+            opacity: 0.85;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-3px);
+            background: #003b99;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+        }
+
+        /* =========================
+       Projects Section
+    ========================== */
+        .projects-wrapper {
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius-lg);
+            padding: 1.2rem 1.5rem;
+            box-shadow: var(--shadow-soft);
+            text-align: center;
+            min-height: 110px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .project-card h3 {
+            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
+            font-weight: 600;
+        }
+
+        .project-card p {
+            font-size: 0.85rem;
+        }
+
+        .project-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+        }
+
+        /* =========================
+       Contact Section
+    ========================== */
+        .contact-wrapper {
+            display: flex;
+            justify-content: center;
+        }
+
+        .contact-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-soft);
+            padding: 1.4rem 1.6rem;
+            width: 100%;
+            max-width: 380px;
+            font-size: 0.85rem;
+        }
+
+        .form-group {
+            margin-bottom: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        label {
+            font-size: 0.78rem;
+            color: var(--text-main);
+        }
+
+        input,
+        textarea {
+            padding: 0.45rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid #cfcfcf;
+            font-family: inherit;
+            font-size: 0.83rem;
+            outline: none;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(0, 82, 204, 0.15);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 70px;
+        }
+
+        .btn-submit {
+            margin-top: 0.5rem;
+            width: 100%;
+            padding: 0.55rem;
+            border-radius: 4px;
+            background: var(--accent);
+            color: #ffffff;
+            border: none;
+            font-size: 0.9rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.15s ease, transform 0.1s ease;
+        }
+
+        .btn-submit:hover {
+            background: #003b99;
+            transform: translateY(-1px);
+        }
+
+        /* =========================
+       Footer
+    ========================== */
+        footer {
+            margin-top: 2rem;
+            background: var(--accent);
+            color: #ffffff;
+            text-align: center;
+            padding: 0.7rem 0.5rem;
+            font-size: 0.78rem;
+        }
+
+        /* =========================
+       Responsiveness
+    ========================== */
+
+        /* Medium screens (tablets) */
+        @media (max-width: 900px) {
+            .Subject-content {
+                flex-direction: column-reverse;
+                align-items: flex-start;
+            }
+
+            .Subject-text h1 {
+                font-size: 2rem;
+            }
+
+            .Subject-text h1 span {
+                font-size: 2.1rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        /* Small screens (mobiles) */
+        @media (max-width: 600px) {
+            .nav-links {
+                display: none;
+                /* simple hide for small devices */
+            }
+
+            .Main {
+                padding-top: 1.8rem;
+            }
+
+            section {
+                padding: 1.8rem 0;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-card {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- =========================
+       Header
+  ========================== -->
+    <header id="top">
+        <div class="container nav-bar">
+            <div class="logo">Rudrapriye singh</div>
+            <nav class="nav-links">
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- =========================
+       Main Section
+  ========================== -->
+    <section class="Main" id="Main">
+        <div class="container Subject-content">
+            <div class="Subject-text">
+                <h1>
+                    Hi, I am<br />
+                    <span>Full Stack Developer</span>
+                </h1>
+                <p class="Subject-subtitle">
+                    Building modern web applications with MERN stack.
+                </p>
+            </div>
+            <div class="Subjectavatar-wrapper">
+                <img src="/image.jpeg" alt="My Photo" class="Subject-photo">
+            </div>
+
+        </div>
+    </section>
+
+    <!-- =========================
+       About Section
+  ========================== -->
+    <section id="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <p class="about-text">
+                Hello! My name is Rudrapriye singh, and I am currently learning web development. This is my first
+                portfolio
+                website where I showcase my passion for creating interactive and responsive web pages. I am a student at
+                XYZ Engineering College, pursuing a B.Tech degree, and I am deeply interested in technology and coding.
+                I love exploring new skills every day, and always aim to improve my knowledge in the field of web
+                development. With a hardworking and consistent mindset, I am determined to grow as a developer and build
+                creative projects that make a real impact.
+            </p>
+        </div>
+    </section>
+
+    <!-- =========================
+       Skills Section
+  ========================== -->
+    <section id="skills" style="background-color: var(--bg-light);">
+        <div class="container">
+            <h2>My Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    HTML
+                    <span>Beginner</span>
+                </div>
+                <div class="skill-card">
+                    CSS
+                    <span>Beginner</span>
+                </div>
+                <div class="skill-card">
+                    JavaScript
+                    <span>Learning</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+       Projects Section
+  ========================== -->
+    <section id="projects">
+        <div class="container">
+            <h2>My Projects</h2>
+            <div class="projects-wrapper">
+                <div class="project-card">
+                    <h3>Project 1</h3>
+                    <p>A simple HTML &amp; CSS webpage.</p>
+                </div>
+
+                <div class="project-card">
+                    <h3>Project 2</h3>
+                    <p>Another awesome mini project.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+       Contact Section
+  ========================== -->
+    <section id="contact" style="background-color: var(--bg-light);">
+        <div class="container">
+            <h2>Contact Me</h2>
+            <div class="contact-wrapper">
+                <form class="contact-card">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input id="name" type="text" placeholder="Enter your name" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input id="email" type="email" placeholder="Enter your email" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" placeholder="Write your message"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Send</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+       Footer
+  ========================== -->
+    <footer>
+        © 2025 Rudrapriye singh. All rights reserved.
+    </footer>
+</body>
+
+</html>
